@@ -51,12 +51,22 @@ def get_annotations(sqlite_files, general_types, image_dirs):
         for bb in bbs:
             object_id = bb[0]
             frame_number = bb[1]
+
+            file_prefix = str(frame_number).zfill(8)
+            frame_path = os.path.join(image_dir, file_prefix+".jpg")
+            im=Image.open(frame_path)
+            width, height = im.size
+
             x_top_left  = bb[2]
             y_top_left  = bb[3]
             x_bottom_right = bb[4]
             y_bottom_right = bb[5]
 
-            file_prefix = str(frame_number).zfill(8)
+            assert x_bottom_right > x_top_left
+            assert y_bottom_right > y_top_left
+
+            assert x_bottom_right < width
+            assert y_bottom_right < height
 
             cursor.execute("SELECT road_user_type FROM objects where object_id == {};".format(object_id))
             road_user_type = cursor.fetchone()[0]
@@ -64,10 +74,6 @@ def get_annotations(sqlite_files, general_types, image_dirs):
             cmd = "SELECT type_string FROM objects_type where road_user_type == {};".format(road_user_type)
             cursor.execute(cmd)
             type_string = cursor.fetchone()[0]
-
-            frame_path = os.path.join(image_dir, file_prefix+".jpg")
-            im=Image.open(frame_path)
-            width, height = im.size
 
             new_bb = {"type": type_string,
                       "type_general": type_general,
