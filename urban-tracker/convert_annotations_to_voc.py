@@ -134,6 +134,7 @@ def write_annotations(annotations_dict, save_dir):
 if __name__ == "__main__":
     base = '/datasets/BigLearning/ahjiang/bb/urban-tracker/'
 
+    '''
     s1 = os.path.join(base, 'rouen/rouen_annotations/rouen_gt_cars.sqlite')
     i1 = os.path.join(base, 'rouen/rouen_frames')
     t1  = 'car'
@@ -185,4 +186,13 @@ if __name__ == "__main__":
 
     annotations = get_annotations([s1,s2], [t1,t2], [i1,i2])
     write_annotations(annotations, save_dir)
+    '''
 
+    s1 = os.path.join(base, 'atrium/atrium_annotations/atrium_gt.sqlite')
+    i1 = os.path.join(base, 'atrium/atrium_frames')
+    t1 = 'pedestrian'
+
+    save_dir = os.path.join(base, 'atrium/atrium_annotations/annotations/')
+
+    annotations = get_annotations([s1], [t1], [i1])
+    write_annotations(annotations, save_dir)
