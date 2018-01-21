@@ -174,7 +174,7 @@ if __name__ == "__main__":
     i2 = os.path.join(base, 'sherbrooke/sherbrooke_frames')
     t2 = 'pedestrian'
 
-    save_dir = os.path.join(base, 'sherbrooke/sherbrooke_annotations/presence_metadata.csv')
+    save_file = os.path.join(base, 'sherbrooke/sherbrooke_annotations/presence_metadata.csv')
 
     write_classification_metadata([s1,s2], [t1,t2], [i1,i2], save_file)
 
@@ -182,6 +182,6 @@ if __name__ == "__main__":
     i1 = os.path.join(base, 'atrium/atrium_frames')
     t1 = 'pedestrian'
 
-    save_dir = os.path.join(base, 'atrium/atrium_annotations/presence_metadata.csv')
+    save_file = os.path.join(base, 'atrium/atrium_annotations/presence_metadata.csv')
 
     write_classification_metadata([s1], [t1], [i1], save_file)
