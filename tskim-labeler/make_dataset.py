@@ -6,6 +6,8 @@ import random
 import shutil
 import os
 
+random.seed(1337)
+
 def get_args(simulator=True):
     parser = argparse.ArgumentParser()
     parser.add_argument("-ld", "--labels_dir", required=True)
@@ -19,11 +21,14 @@ def get_args(simulator=True):
     parser.add_argument("-fs", "--frame_name_size", required=True, type=int)
     return parser.parse_args()
 
+
 def get_event_length():
     pass
 
+
 def get_event_frequency():
     pass
+
 
 def _get_event_data(labels_file, class_mapping):
     # data = {class_name: {event_id: [frame_ids...]}}
@@ -50,6 +55,7 @@ def _get_event_data(labels_file, class_mapping):
             data[label][cur_event_id].append(frame_id)
 
     return data
+
 
 def _sort_frames(event_data, percent_train, max_event_sample=50):
     # data = {"train": {"class_name": [frame_id, ...]}, "test": {}}
@@ -134,9 +140,11 @@ def make_dataset(labels_file,
                     print "Warning: Could not find file {}".format(frame_path)
     print "{} images written to {}".format(written_images, dataset_dir)
 
+
 def parse_labeler_output(labels_dir, labels_out):
     data_points, full_labels = parse_tskim_labels.main(labels_dir)
     parse_tskim_labels.write_file(labels_out, full_labels)
+
 
 def main():
 
