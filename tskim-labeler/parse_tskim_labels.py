@@ -13,7 +13,6 @@ state_unknown = "Unknown";
 state_event = "Event";
 
 def read_file(filename, data_points):
-    print(filename);
     f = open(filename);
     for line in f:
         split_line = line.rstrip().split(":");
